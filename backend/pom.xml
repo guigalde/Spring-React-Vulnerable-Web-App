@@ -8,21 +8,23 @@
 		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>TFG</groupId>
-	<artifactId>GameVault</artifactId>
+	<groupId>TFM</groupId>
+	<artifactId>VulnerableWebApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GameVault</name>
-	<description>Proyecto de TFG de Guillermo Galeano de Paz</description>
+	<name>VulnerableWebApp</name>
+	<description>Proyecto de TFM de Guillermo Galeano de Paz</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.16.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -101,6 +103,17 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.5.5.Final</version>
         </dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20210307</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -109,7 +122,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>TFG.GameVault.GameVaultApplication</mainClass>
+					<mainClass>TFM.VulnerableWebApp.VulnerableWebAppApplication</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -129,14 +142,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<resources>     
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>                      
-					<include>**/*.properties</include>                  
-				</includes>
-			</resource>            
-		</resources>
 	</build>
 
 </project>

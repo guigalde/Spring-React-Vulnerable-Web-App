@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { request, setAuthHeader } from '../helpers/axios_helper';
+import { useState, useContext } from "react";
+import { request, setAuthHeader, getUserInfo } from '../helpers/axios_helper';
 import classNames from 'classnames';
 import {useNavigate, Link} from 'react-router-dom';
-import { UserContext } from "../helpers/user_context";
-import { useContext } from "react";
 
-export default function RegisterForm({setUser}){
-    const user = useContext(UserContext);
+
+export default function RegisterForm(){
     const navigate = useNavigate();
     const [registerUser, setRegisterUser] = useState({
         username: "",
@@ -18,34 +16,36 @@ export default function RegisterForm({setUser}){
         setRegisterUser({ ...registerUser, [e.target.name]: e.target.value });
     }
 
-    function onRegister(event, username, email, password) {
-        event.preventDefault();
-        request(
-            "POST",
-            "/register",
-            {
-                username: username,
-                email: email,
-                password: password
-            }).then(
-            (response) => {
-                setAuthHeader(response.data.token);
-                setUser({
-                    isLogged: true,
-                    username: response.data.username,
-                    email: response.data.email,
-                    role: response.data.role
-                });
-                navigate('/');
-            }).catch(
-            (error) => {
-                setAuthHeader(null);
-            }
+    async function onRegister(username, email, password) {
+        console.log("Registering user: ", username, email, password);
+            request(
+                "POST",
+                "/api/register",
+                {
+                    username: username,
+                    email: email,
+                    password: password
+                }, navigate).then(
+                (response) => {
+                    if(response.status === 201){
+                        alert("Successfully registered!")
+                        setAuthHeader(response.data.token);
+                        navigate('/');
+                    }else{
+                        alert(response.data)
+                        navigate('/error')
+                    }
+                }).catch(
+                (error) => {
+                    setAuthHeader(null);
+                    navigate('/error');
+                }
             
         );
     }
-    function onSubmitRegister(e) {
-        onRegister(e, registerUser.username, registerUser.email, registerUser.password);
+    async function onSubmitRegister(e) {
+        e.preventDefault();
+        await onRegister(registerUser.username, registerUser.email, registerUser.password);
     };
 
     return (

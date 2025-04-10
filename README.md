@@ -1,1 +1,1 @@
-Proyecto TFG de Guillermo Galeano de Paz, inicializado con Spring Initializr.
+Proyecto TFM de Guillermo Galeano de Paz, inicializado con Spring Initializr.

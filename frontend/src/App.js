@@ -3,47 +3,41 @@ import './App.css';
 import {Routes, Route} from 'react-router-dom';
 import { useState } from 'react';
 import Header from './components/Header';
-import { UserContext } from './helpers/user_context';
+
 import { WelcomeContent } from './components/WelcomeContent';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 
+import { useNavigate } from 'react-router-dom';
+
 function App() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
     role: ""
   });
-  function onLogOutClick(){
-    setUser({
-      isLogged: false,
-      username: "",
-      email: "",
-      role: ""
-    });
-    window.localStorage.removeItem("auth_token");
-  }
+
 
   return (
-    <UserContext.Provider value={user}>
+
       <div className="App">
         <Header 
-          pageTitle= "GameVault" 
+          pageTitle= "VulnerableWebApp" 
           logoSrc= {logo}
-          onLogOutClick= {onLogOutClick}
         />
-        <div className="AppContent">
+        <div className="AppContent" style={{height:'100%', width:'100%'}}>
           <Routes>
-            <Route path="/login" exact element={<LoginForm  setUser={setUser}/>}/>          
-            <Route path="/register" exact element={<RegisterForm  setUser={setUser}/>}/>
+            <Route path="/login" exact element={<LoginForm/>}/>          
+            <Route path="/register" exact element={<RegisterForm/>}/>
             <Route path="/" exact element={<WelcomeContent/>}/>
           </Routes>
         </div>
       </div>
-      
-    </UserContext.Provider>
-  );
+        );
+
+
 }
 
 export default App;

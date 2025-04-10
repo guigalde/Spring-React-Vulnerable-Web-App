@@ -31,4 +31,9 @@
     min-height: 90vh;
     background-color: #C8F4F9;
     padding: 20px;
-}   
+}
+
+.dropdown-item:hover {
+    background-color: #83cccd !important;
+    color: white !important;
+}
