@@ -1,0 +1,1 @@
+This file is intended to be an asset for the command injection vulnerability.

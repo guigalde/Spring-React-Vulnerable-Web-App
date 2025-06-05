@@ -67,6 +67,11 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
                   <b style={{ padding: '20px' }}>CSRF</b>
                 </div>
               </Link>
+              <Link to="/vulnerabilities/commandInjection?filename=exampleFile.txt" className="link">
+                <div className="nav-item" style={xssStyle}>
+                  <b style={{ padding: '20px' }}>Command Injection</b>
+                </div>
+              </Link>
               </>
 }
         </div>
