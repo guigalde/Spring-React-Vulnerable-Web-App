@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { WelcomeContent } from './components/WelcomeContent';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import Xss from './components/vulnerabilities/Xss';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/login" exact element={<LoginForm/>}/>          
             <Route path="/register" exact element={<RegisterForm/>}/>
             <Route path="/" exact element={<WelcomeContent/>}/>
+            <Route path="/vulnerabilities/xss" exact element={<Xss/>}/>
           </Routes>
         </div>
       </div>
