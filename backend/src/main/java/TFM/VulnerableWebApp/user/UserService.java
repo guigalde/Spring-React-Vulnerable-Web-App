@@ -90,4 +90,11 @@ public class UserService {
 
         return toUserDto(savedUser);
     }
+
+    public UserDto updateUser(CredentialsDto user) {
+        User existingUser = findByUsername(user.getUsername());
+        existingUser.setPassword(passwordEncoder.encode(CharBuffer.wrap(user.getPassword())));
+        ur.save(existingUser);
+        return toUserDto(existingUser);
+    }
 }
