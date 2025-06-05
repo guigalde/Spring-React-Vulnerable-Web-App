@@ -91,10 +91,15 @@ public class UserService {
         return toUserDto(savedUser);
     }
 
-    public UserDto updateUser(CredentialsDto user) {
-        User existingUser = findByUsername(user.getUsername());
-        existingUser.setPassword(passwordEncoder.encode(CharBuffer.wrap(user.getPassword())));
-        ur.save(existingUser);
-        return toUserDto(existingUser);
+    public UserDto updateUser(String username, String oldPassword, String newPassword) {
+        User existingUser = findByUsername(username);
+        if(passwordEncoder.matches(CharBuffer.wrap(oldPassword), existingUser.getPassword())) {
+            existingUser.setPassword(passwordEncoder.encode(CharBuffer.wrap(newPassword)));
+            ur.save(existingUser);
+            return toUserDto(existingUser);
+        }
+        else {
+            throw new AppException("Invalid credentials", HttpStatus.BAD_REQUEST);
+        }
     }
 }
