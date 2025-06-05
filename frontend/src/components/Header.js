@@ -45,7 +45,7 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
   }, [location]);
 
     function onLogOutClick(){
-      window.localStorage.removeItem("auth_token");
+      document.cookie= "";
       navigate("/");
     }
   return (
@@ -60,6 +60,11 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
               <Link to="/vulnerabilities/xss" className="link">
                 <div className="nav-item" style={xssStyle}>
                   <b style={{ padding: '20px' }}>XSS</b>
+                </div>
+              </Link>
+              <Link to="/vulnerabilities/csrf" className="link">
+                <div className="nav-item" style={xssStyle}>
+                  <b style={{ padding: '20px' }}>CSRF</b>
                 </div>
               </Link>
               </>
