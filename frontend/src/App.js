@@ -9,6 +9,8 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Xss from './components/vulnerabilities/Xss';
 import Csrf from './components/vulnerabilities/Csrf';
+import CommandInjection from './components/vulnerabilities/CommandInjection';
+
 
 
 import { useNavigate } from 'react-router-dom';
@@ -37,6 +39,8 @@ function App() {
             <Route path="/" exact element={<WelcomeContent/>}/>
             <Route path="/vulnerabilities/xss" exact element={<Xss/>}/>
             <Route path="/vulnerabilities/csrf" exact element={<Csrf/>}/>
+            <Route path="/vulnerabilities/:commandInjection" exact element={<CommandInjection/>}/>
+
 
           </Routes>
         </div>
