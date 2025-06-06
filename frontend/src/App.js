@@ -10,6 +10,8 @@ import RegisterForm from './components/RegisterForm';
 import Xss from './components/vulnerabilities/Xss';
 import Csrf from './components/vulnerabilities/Csrf';
 import CommandInjection from './components/vulnerabilities/CommandInjection';
+import SQLInjection from './components/vulnerabilities/SQLInjection';
+
 
 
 
@@ -39,7 +41,8 @@ function App() {
             <Route path="/" exact element={<WelcomeContent/>}/>
             <Route path="/vulnerabilities/xss" exact element={<Xss/>}/>
             <Route path="/vulnerabilities/csrf" exact element={<Csrf/>}/>
-            <Route path="/vulnerabilities/:commandInjection" exact element={<CommandInjection/>}/>
+            <Route path="/vulnerabilities/commandInjection/:options" exact element={<CommandInjection/>}/>
+            <Route path="/vulnerabilities/sqlInjection/:options" exact element={<SQLInjection/>}/>
 
 
           </Routes>

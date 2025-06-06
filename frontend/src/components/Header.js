@@ -21,7 +21,7 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
   const [collectionsTabStyle, setCollectionsTabStyle] = useState({borderRight: '1.5px solid black'});
 
   useEffect(() => {
-    if (location.pathname === "/videogames" || location.pathname === "/videogameDetails/*"){
+    if (location.pathname === "/*"){
       setXssStyle({borderLeft: '1.5px solid black', borderRight: '1.5px solid black', backgroundColor: '#EEB5EB'});
       setMyGamesTabStyle({borderRight: '1.5px solid black', width: '10vh'});
       setWishlistTabStyle({borderRight: '1.5px solid black'});
@@ -67,9 +67,14 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
                   <b style={{ padding: '20px' }}>CSRF</b>
                 </div>
               </Link>
-              <Link to="/vulnerabilities/commandInjection?filename=exampleFile.txt" className="link">
+              <Link to="/vulnerabilities/commandInjection/options?filename=exampleFile.txt" className="link">
                 <div className="nav-item" style={xssStyle}>
                   <b style={{ padding: '20px' }}>Command Injection</b>
+                </div>
+              </Link>
+              <Link to="/vulnerabilities/sqlInjection/options?objectName=users" className="link">
+                <div className="nav-item" style={xssStyle}>
+                  <b style={{ padding: '20px' }}>SQL Injection</b>
                 </div>
               </Link>
               </>
