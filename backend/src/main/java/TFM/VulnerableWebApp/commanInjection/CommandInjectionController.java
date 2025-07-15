@@ -28,7 +28,7 @@ public class CommandInjectionController {
             String[] commandList = command.split(" ");
             
             if( System.getProperty("user.dir").equals("C:\\Users\\Guille\\Desktop\\TFM\\SpringAndReact_VulnerableApp\\backend")){
-                String[] cmdList = new String[] {"cmd.exe", "/c", "type"};
+                String[] cmdList = new String[] {"cmd.exe","/c","cd", "uploads", "&&", "type"};
                 String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
                 .toArray(String[]::new);
                 for(String s : fullCommand){
@@ -36,7 +36,7 @@ public class CommandInjectionController {
                 }
                 process = new ProcessBuilder(fullCommand);
             }else{
-                String[] cmdList = new String[] {"cmd.exe", "/c", "cd", "backend", "&&", "type"};
+                String[] cmdList = new String[] {"cmd.exe", "/c", "cd", "backend/uploads", "&&", "type"};
                 String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
                 .toArray(String[]::new);
                 System.out.println(fullCommand);
