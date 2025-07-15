@@ -11,6 +11,7 @@ import Xss from './components/vulnerabilities/Xss';
 import Csrf from './components/vulnerabilities/Csrf';
 import CommandInjection from './components/vulnerabilities/CommandInjection';
 import SQLInjection from './components/vulnerabilities/SQLInjection';
+import UnrestrictedFileUpload from './components/vulnerabilities/UnrestrictedFileUpload';
 
 
 
@@ -43,7 +44,7 @@ function App() {
             <Route path="/vulnerabilities/csrf" exact element={<Csrf/>}/>
             <Route path="/vulnerabilities/commandInjection/:options" exact element={<CommandInjection/>}/>
             <Route path="/vulnerabilities/sqlInjection/:options" exact element={<SQLInjection/>}/>
-
+            <Route path="/vulnerabilities/fileUpload" exact element={<UnrestrictedFileUpload/>}/>
 
           </Routes>
         </div>

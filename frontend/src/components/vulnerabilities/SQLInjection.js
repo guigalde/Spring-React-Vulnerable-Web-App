@@ -4,7 +4,7 @@ import {  request } from '../../helpers/axios_helper';
 export default function SQLInjection(){
 
     const [output, setOutput] = useState(null);
-
+    const [showTip, setShowTip] = useState(null);
 
     function executeCommand(){
         var filename = new URLSearchParams(document.location.search).get('objectName');
@@ -40,11 +40,24 @@ export default function SQLInjection(){
     }, []);
 
     return (
-        <div className="container" style={{ width: '200vh' }}>
-            <h1 className="text-center">SQL Injection Vulnerable  User Listing Page</h1>
-            <div className="d-flex justify-content-center">
-                {createDataStructure()}
+            <div className="container" style={{ width: '200vh' }}>
+                <h1 className="text-center">SQL Injection Vulnerable  User Listing Page</h1>
+                <div className="d-flex justify-content-center">
+                    {createDataStructure()}
+                </div>
+                <div className="d-flex justify-content-center" >
+                    <b  className="text-center" onClick={()=>setShowTip(true)}>Display tip</b>
+                </div>
+                <div className="d-flex justify-content-center" >
+
+                                        {showTip && (
+                                            <div className="alert alert-info text-center" role="alert">
+                                                <p>The objectName param in the URL is used directly on a query</p>
+                                                <button type="button" className="btn-close" onClick={() => setShowTip(false)}></button>
+                                            </div>
+                                        )}
+                </div>  
             </div>
-        </div>
+        
     );
 }

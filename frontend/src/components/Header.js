@@ -77,7 +77,12 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
                   <b style={{ padding: '20px' }}>SQL Injection</b>
                 </div>
               </Link>
-              </>
+              <Link to="/vulnerabilities/fileUpload" className="link">
+              <div className="nav-item" style={xssStyle}>
+                <b style={{ padding: '20px' }}>Unrestricted File Upload</b>
+              </div>
+            </Link>
+            </>
 }
         </div>
         <div className="align-items-center" style={{
