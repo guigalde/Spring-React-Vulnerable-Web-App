@@ -32,6 +32,7 @@ public class WebSecurityConfig {
               .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
               .authorizeHttpRequests((requests) -> requests
               .requestMatchers("/api/**").permitAll()
+              .requestMatchers("/actuator/**").permitAll()
               .anyRequest().authenticated());
     
     return http.build();
