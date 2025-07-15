@@ -82,6 +82,11 @@ export default function Header({logoSrc, pageTitle, onLogOutClick}) {
                 <b style={{ padding: '20px' }}>Unrestricted File Upload</b>
               </div>
             </Link>
+            <Link to="/vulnerabilities/actuatorExposed/options?endpoint=actuator" className="link">
+                <div className="nav-item" style={xssStyle}>
+                  <b style={{ padding: '20px' }}>Spring Actuator Exposed</b>
+                </div>
+              </Link>
             </>
 }
         </div>

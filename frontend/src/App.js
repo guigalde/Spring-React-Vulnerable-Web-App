@@ -12,6 +12,7 @@ import Csrf from './components/vulnerabilities/Csrf';
 import CommandInjection from './components/vulnerabilities/CommandInjection';
 import SQLInjection from './components/vulnerabilities/SQLInjection';
 import UnrestrictedFileUpload from './components/vulnerabilities/UnrestrictedFileUpload';
+import SpringActuatorExposed from './components/vulnerabilities/SpringActuatorExposed';
 
 
 
@@ -45,6 +46,8 @@ function App() {
             <Route path="/vulnerabilities/commandInjection/:options" exact element={<CommandInjection/>}/>
             <Route path="/vulnerabilities/sqlInjection/:options" exact element={<SQLInjection/>}/>
             <Route path="/vulnerabilities/fileUpload" exact element={<UnrestrictedFileUpload/>}/>
+            <Route path="/vulnerabilities/actuatorExposed/:options" exact element={<SpringActuatorExposed/>}/>
+
 
           </Routes>
         </div>
