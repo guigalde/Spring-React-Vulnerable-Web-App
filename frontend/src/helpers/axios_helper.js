@@ -3,7 +3,12 @@ import {jwtDecode} from 'jwt-decode';
 
 
 export const getAuthToken = () => {
-    return window.localStorage.getItem('auth_token');
+    const cookieValue= document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("auth_token="))
+    ?.split("=")[1];
+    console.log("Cookie Value: ", cookieValue);
+    return cookieValue;
 };
 
 export const getUserInfo = () => {
@@ -11,14 +16,19 @@ export const getUserInfo = () => {
     if (auth_token === null) {
         return {id: null, sub: null, email: null, role: null, exp: null};
     }
-    return jwtDecode(getAuthToken());
+    try{
+        return jwtDecode(getAuthToken());
+    }catch (error) {
+        console.error("Error decoding token:", error);
+        return {id: null, sub: null, email: null, role: null, exp: null};
+    }
 }
 
 export const setAuthHeader = (token) => {
     if (token !== null) {
-      window.localStorage.setItem("auth_token", token);
+      document.cookie = "auth_token="+token+"; path=/; samesite=none; max-age=43200; secure";
     } else {
-      window.localStorage.removeItem("auth_token");
+      document.cookie = "auth_token=null; path=/; samesite=none; max-age=43200; secure";
     }
 };
 

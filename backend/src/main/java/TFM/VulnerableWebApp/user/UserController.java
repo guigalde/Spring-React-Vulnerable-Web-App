@@ -15,7 +15,12 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -50,5 +55,15 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping(value="api/changePassword", params = {"newPassword", "oldPassword", "username"})
+    public ResponseEntity<UserDto> changePassword(@RequestParam @Valid String newPassword, @RequestParam @Valid String oldPassword,
+         @RequestParam @Valid String username) {
+            UserDto userDto = us.updateUser(username, oldPassword, newPassword);
+            userDto.setToken(userAuthenticationProvider.createToken(userDto));
+            return ResponseEntity.ok(userDto);
+        
+    }
+    
     
 }
