@@ -23,24 +23,38 @@ public class CommandInjectionController {
     @GetMapping(value="api/commandInjection", params = {"command"})
     public ResponseEntity<String> getExampleFile(@RequestParam String command) {
         try{
-            
+            String os = System.getProperty("os.name").toLowerCase();
             ProcessBuilder process = new ProcessBuilder();
             String[] commandList = command.split(" ");
-            
-            if( System.getProperty("user.dir").equals("C:\\Users\\Guille\\Desktop\\TFM\\SpringAndReact_VulnerableApp\\backend")){
-                String[] cmdList = new String[] {"cmd.exe","/c","cd", "uploads", "&&", "type"};
-                String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
-                .toArray(String[]::new);
-                for(String s : fullCommand){
-                    System.out.println(s);
+            if(os.contains("linux")){
+                if( System.getProperty("user.dir").contains("\\backend") || System.getProperty("user.dir").contains("/app")){
+                    String[] cmdList = new String[] {"/bin/sh", "-c","cd uploads && cat "+command };
+                    
+                    process = new ProcessBuilder(cmdList);
+                }else{
+                    String[] cmdList = new String[] {"/bin/sh", "-c", "pwd && cd backend/uploads && cat "+command};
+                    
+                    process = new ProcessBuilder(cmdList);
                 }
-                process = new ProcessBuilder(fullCommand);
+            }else if(os.contains("win")){
+                System.out.println("Windows command");
+                if( System.getProperty("user.dir").contains("\\backend")){
+                    String[] cmdList = new String[] {"cmd.exe","/c","cd", "uploads", "&&", "type"};
+                    String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
+                    .toArray(String[]::new);
+                    for(String s : fullCommand){
+                        System.out.println(s);
+                    }
+                    process = new ProcessBuilder(fullCommand);
+                }else{
+                    String[] cmdList = new String[] {"cmd.exe", "/c", "cd", "backend/uploads", "&&", "type"};
+                    String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
+                    .toArray(String[]::new);
+                    System.out.println(fullCommand);
+                    process = new ProcessBuilder(fullCommand);
+                }
             }else{
-                String[] cmdList = new String[] {"cmd.exe", "/c", "cd", "backend/uploads", "&&", "type"};
-                String[] fullCommand = Stream.concat(Arrays.stream(cmdList), Arrays.stream(commandList))
-                .toArray(String[]::new);
-                System.out.println(fullCommand);
-                process = new ProcessBuilder(fullCommand);
+                System.out.println("Unknown OS");
             }
             process.redirectErrorStream(true);
             Process p = process.start();
