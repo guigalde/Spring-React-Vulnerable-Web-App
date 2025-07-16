@@ -1,0 +1,31 @@
+volumes:
+  data:
+services:
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vulnerabledb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      timeout: 10s
+      retries: 10
+  backend:
+    image: springandreact_vulnerableapp/backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      spring.datasource.url: jdbc:mariadb://db:3306/vulnerabledb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+  frontend:
+    image: springandreact_vulnerableapp/frontend
+    ports:
+      - "3000:3000"
+  
