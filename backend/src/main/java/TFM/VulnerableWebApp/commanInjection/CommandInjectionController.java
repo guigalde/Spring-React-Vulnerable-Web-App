@@ -63,8 +63,8 @@ public class CommandInjectionController {
             String line;
             while (true) {
                 line = r.readLine();
-                output += line + "\n";
                 if (line == null) { break; }
+                output += line + "\n";
                 System.out.println(line);
             }
 
