@@ -8,7 +8,8 @@ There are 6 main vulnerabilities:
 5. Command Injection, this vulnerability allows the execution of commands and files uploaded in vulnerability nº 4.
 6. Spring Actuator exposed, the actuator endpoint is not hidden which allows an attacker to collect a lot of sensitive data on the server running the application.
 
-##Install guide
+## Installation guide
+
 The only requisite is having Docker Compose installed.
 1. Clone this repository and extract it.
 2. Open a terminal on the root folder of the project and execute:
