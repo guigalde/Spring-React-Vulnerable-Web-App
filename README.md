@@ -22,4 +22,4 @@ The only requisite is having Docker Compose installed.
    
 After following these steps, the application should be available at http://localhost:3000.
 
-Please if you find some bug or unintended feature please let me know using the repositorys project, thank you.
+Please if you find some bug or unintended feature please let me know using the repository's project, thank you.
